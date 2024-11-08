@@ -98,7 +98,7 @@ int main() {
         sortRows(arr, n, maxVal, maxCount);
     }
     else {
-        cout << "Нет второго максимального элемента." << endl;
+        cout << "It has no second max element." << endl;
     }
 
     return 0;
