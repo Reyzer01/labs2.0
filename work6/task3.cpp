@@ -1,5 +1,6 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <cstdlib>
+using namespace std;
 
 const int MAX_SIZE = 100;
 
@@ -7,14 +8,14 @@ int main() {
     int n, m;
     int A[MAX_SIZE][MAX_SIZE];
 
-    // Ввод размеров матрицы
-    std::cout << "Input the number of rows (n): ";
-    std::cin >> n;
-    std::cout << "Input the number of columns (m): ";
-    std::cin >> m;
+    // Г‚ГўГ®Г¤ Г°Г Г§Г¬ГҐГ°Г®Гў Г¬Г ГІГ°ГЁГ¶Г»
+    cout << "Input the number of rows (n): ";
+    cin >> n;
+    cout << "Input the number of columns (m): ";
+    cin >> m;
 
-    // Ввод элементов матрицы
-    std::cout << "Input matrix elements:" << std::endl;
+    // Г‚ГўГ®Г¤ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г¬Г ГІГ°ГЁГ¶Г»
+    cout << "Input matrix elements:" << endl;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             std::cin >> A[i][j];
@@ -24,7 +25,7 @@ int main() {
     int max_row_index = 0;
     int max_row_sum = 0;
 
-    // Поиск строки с наибольшей по абсолютной величине суммой
+    // ГЏГ®ГЁГ±ГЄ Г±ГІГ°Г®ГЄГЁ Г± Г­Г ГЁГЎГ®Г«ГјГёГҐГ© ГЇГ® Г ГЎГ±Г®Г«ГѕГІГ­Г®Г© ГўГҐГ«ГЁГ·ГЁГ­ГҐ Г±ГіГ¬Г¬Г®Г©
     for (int i = 0; i < n; ++i) {
         int current_row_sum = 0;
         for (int j = 0; j < m; ++j) {
@@ -36,17 +37,17 @@ int main() {
         }
     }
 
-    // Замена элементов найденной строки на 9999
+    // Г‡Г Г¬ГҐГ­Г  ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г­Г Г©Г¤ГҐГ­Г­Г®Г© Г±ГІГ°Г®ГЄГЁ Г­Г  9999
     for (int j = 0; j < m; ++j) {
         A[max_row_index][j] = 9999;
     }
 
-    // Вывод измененной матрицы
+    // Г‚Г»ГўГ®Г¤ ГЁГ§Г¬ГҐГ­ГҐГ­Г­Г®Г© Г¬Г ГІГ°ГЁГ¶Г»
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
-            std::cout << A[i][j] << " ";
+            cout << A[i][j] << " ";
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 
     return 0;
