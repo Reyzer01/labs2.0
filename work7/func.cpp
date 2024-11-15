@@ -16,7 +16,7 @@ void readMatrix(int matrix[MAX_SIZE][MAX_SIZE], int& n) {
 
 void processMatrix(int matrix[MAX_SIZE][MAX_SIZE], int n) {
     int maxElement = matrix[0][0];
-    // Максимальный элемент
+    //  РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             if (matrix[i][j] > maxElement) {
@@ -25,7 +25,7 @@ void processMatrix(int matrix[MAX_SIZE][MAX_SIZE], int n) {
         }
     }
 
-    // Проверка на наличие второго максимального элемента
+    // РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РІС‚РѕСЂРѕРіРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
     bool hasDuplicateMax = false;
     for (int i = 0; i < n && !hasDuplicateMax; ++i) {
         for (int j = 0; j < n && !hasDuplicateMax; ++j) {
@@ -35,12 +35,12 @@ void processMatrix(int matrix[MAX_SIZE][MAX_SIZE], int n) {
         }
     }
 
-    // Упорядочивание строки по количеству простых чисел
+    // РЈРїРѕСЂСЏРґРѕС‡РёРІР°РЅРёРµ СЃС‚СЂРѕРєРё РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ РїСЂРѕСЃС‚С‹С… С‡РёСЃРµР»
     if (hasDuplicateMax) {
         for (int i = 0; i < n - 1; ++i) {
             for (int j = i + 1; j < n; ++j) {
                 if (countPrimes(matrix[i], n) < countPrimes(matrix[j], n)) {
-                    // Меняем строки местами
+                    // РњРµРЅСЏРµРј СЃС‚СЂРѕРєРё РјРµСЃС‚Р°РјРё
                     for (int k = 0; k < n; ++k) {
                         std::swap(matrix[i][k], matrix[j][k]);
                     }
@@ -51,7 +51,7 @@ void processMatrix(int matrix[MAX_SIZE][MAX_SIZE], int n) {
 }
 
 void writeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int n) {
-    std::cout << "Результат:\n";
+    std::cout << "Result:\n";
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             std::cout << matrix[i][j] << " ";
