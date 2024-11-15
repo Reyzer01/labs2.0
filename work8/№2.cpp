@@ -10,7 +10,7 @@ bool hasRepeatedVowels(const std::string& word) {
     for (char ch : word) {
         if (std::string("aeiouAEIOU").find(ch) != std::string::npos) {
             if (vowels.count(ch) > 0) {
-                return true; // Найдены повторяющиеся гласные
+                return true; // РќР°Р№РґРµРЅС‹ РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ РіР»Р°СЃРЅС‹Рµ
             }
             vowels.insert(ch);
         }
@@ -23,14 +23,14 @@ std::string reverseString(const std::string& str) {
 }
 
 int main() {
-    std::string text = "Some example of the text with words"; // Пример
+    std::string text = "Some example of the text with words"; // ГЏГ°ГЁГ¬ГҐГ°
 
     std::istringstream iss(text);
     std::vector<std::string> words;
     std::vector<std::string> repeatedVowelWords;
     std::vector<std::string> invertedWords;
 
-    // Разбивка текста на слова
+    // ГђГ Г§ГЎГЁГўГЄГ  ГІГҐГЄГ±ГІГ  Г­Г  Г±Г«Г®ГўГ 
     std::string word;
     while (iss >> word) {
         if (hasRepeatedVowels(word)) {
@@ -41,10 +41,10 @@ int main() {
         }
     }
 
-    // Сортировка слов с повторяющимися гласными
+    // Г‘Г®Г°ГІГЁГ°Г®ГўГЄГ  Г±Г«Г®Гў Г± ГЇГ®ГўГІГ®Г°ГїГѕГ№ГЁГ¬ГЁГ±Гї ГЈГ«Г Г±Г­Г»Г¬ГЁ
     std::sort(repeatedVowelWords.begin(), repeatedVowelWords.end());
 
-    // Вывод результата
+    // Г‚Г»ГўГ®Г¤ Г°ГҐГ§ГіГ«ГјГІГ ГІГ 
     std::cout << "Words with repeated vowels (in alphabetical order):\n";
     for (const auto& w : repeatedVowelWords) {
         std::cout << w << "\n";
