@@ -23,14 +23,14 @@ std::string reverseString(const std::string& str) {
 }
 
 int main() {
-    std::string text = "Some example of the text with words"; // Ïðèìåð
+    std::string text = "Some example of the text with words"; // Пример
 
     std::istringstream iss(text);
     std::vector<std::string> words;
     std::vector<std::string> repeatedVowelWords;
     std::vector<std::string> invertedWords;
 
-    // Ðàçáèâêà òåêñòà íà ñëîâà
+    // Разбивка текста на слова
     std::string word;
     while (iss >> word) {
         if (hasRepeatedVowels(word)) {
@@ -41,10 +41,10 @@ int main() {
         }
     }
 
-    // Ñîðòèðîâêà ñëîâ ñ ïîâòîðÿþùèìèñÿ ãëàñíûìè
+    // Сортировка слов с повторяющимися гласными
     std::sort(repeatedVowelWords.begin(), repeatedVowelWords.end());
 
-    // Âûâîä ðåçóëüòàòà
+    //  Вывод результата
     std::cout << "Words with repeated vowels (in alphabetical order):\n";
     for (const auto& w : repeatedVowelWords) {
         std::cout << w << "\n";
