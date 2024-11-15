@@ -5,13 +5,13 @@
 #include <set>
 #include <algorithm>
 #include <map>
-// Функция для проверки, является ли символ согласной
+//  Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё, СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃРёРјРІРѕР» СЃРѕРіР»Р°СЃРЅРѕР№
 bool isConsonant(char c) {
     c = std::tolower(c);
     return isalpha(c) && !std::strchr("aeiou", c);
 }
 
-// Функция для подсчета различных согласных в слове
+//  Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРѕРґСЃС‡РµС‚Р° СЂР°Р·Р»РёС‡РЅС‹С… СЃРѕРіР»Р°СЃРЅС‹С… РІ СЃР»РѕРІРµ
 int countDistinctConsonants(const std::string& word) {
     std::set<char> consonants;
     for (char c : word) {
@@ -29,7 +29,7 @@ int main(){
     std::set<std::string> uniqueWords;
     std::string line;
 
-    // Чтение файла и обработка слов
+    // Р§С‚РµРЅРёРµ С„Р°Р№Р»Р° Рё РѕР±СЂР°Р±РѕС‚РєР° СЃР»РѕРІ
     while (std::getline(inputFile, line)){
         std::istringstream iss(line);
         std::string word;
@@ -41,18 +41,18 @@ int main(){
     }
     std::string word;
     std::map<std::string, int> wordConsonantCount;
-    // Перенос уникальных слов в вектор
+    // РџРµСЂРµРЅРѕСЃ СѓРЅРёРєР°Р»СЊРЅС‹С… СЃР»РѕРІ РІ РІРµРєС‚РѕСЂ
     for (const auto& word : uniqueWords){
         words.push_back(word);
     }
 
-    // Сортируем слова по количеству различных согласных
+    // РЎРѕСЂС‚РёСЂРѕРІРєР° СЃР»РѕРІР° РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ СЂР°Р·Р»РёС‡РЅС‹С… СЃРѕРіР»Р°СЃРЅС‹С…
     std::vector<std::pair<std::string, int>> sortedWords(wordConsonantCount.begin(), wordConsonantCount.end());
     std::sort(sortedWords.begin(), sortedWords.end(), [](const auto& a, const auto& b) {
-        return a.second > b.second; // Сортировка по убыванию
+        return a.second > b.second; // Г‘Г®Г°ГІГЁГ°Г®ГўГЄГ  ГЇГ® ГіГЎГ»ГўГ Г­ГЁГѕ
         });
 
-    // Ограничиваем количество слов до N (2000)
+    // РћРіСЂР°РЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° СЃР»РѕРІ РґРѕ N (2000)
     int N = std::min(2000, static_cast<int>(sortedWords.size()));
 
     for (int i = 0; i < N; ++i) {
