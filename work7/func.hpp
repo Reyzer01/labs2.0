@@ -1,7 +1,7 @@
 #ifndef FUNC_HPP
 #define FUNC_HPP
 
-const int MAX_SIZE = 100; // Максимальный размер матрицы
+const int MAX_SIZE = 100; // РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РјР°С‚СЂРёС†С‹
 
 void readMatrix(int matrix[MAX_SIZE][MAX_SIZE], int& n);
 void processMatrix(int matrix[MAX_SIZE][MAX_SIZE], int n);
