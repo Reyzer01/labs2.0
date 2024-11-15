@@ -19,13 +19,13 @@ void getMostFrequentLetters(const std::string& text, char mostFrequent[], int co
         }
     }
 
-    // Сортируем буквы по частоте
+    // РЎРѕСЂС‚РёСЂРѕРІРєР° Р±СѓРєРІ РїРѕ С‡Р°СЃС‚РѕС‚Рµ
     std::vector<std::pair<char, int>> sortedFreq(frequency.begin(), frequency.end());
     std::sort(sortedFreq.begin(), sortedFreq.end(), [](const auto& a, const auto& b) {
         return a.second > b.second;
         });
 
-    // Заполняем массив наиболее частыми буквами
+    // Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° РЅР°РёР±РѕР»РµРµ С‡Р°СЃС‚С‹РјРё Р±СѓРєРІР°РјРё
     for (int i = 0; i < count && i < sortedFreq.size(); i++) {
         mostFrequent[i] = sortedFreq[i].first;
     }
@@ -46,7 +46,7 @@ std::string processWord(const std::string& word, const char mostFrequent[], int 
         std::string upperWord = word;
         std::string foundLetters = "(";
 
-        // Преобразуем слово в заглавные буквы
+        // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СЃР»РѕРІР° РІ Р·Р°РіР»Р°РІРЅС‹Рµ Р±СѓРєРІС‹
         for (size_t i = 0; i < upperWord.length(); i++) {
             upperWord[i] = std::toupper(upperWord[i]);
         }
@@ -58,7 +58,7 @@ std::string processWord(const std::string& word, const char mostFrequent[], int 
             }
         }
         if (foundLetters.length() > 1) {
-            foundLetters.erase(foundLetters.size() - 2); // Удаляем последнюю запятую и пробел
+            foundLetters.erase(foundLetters.size() - 2); //  РЈРґР°Р»РµРЅРёРµ РїРѕСЃР»РµРґРЅРµР№ Р·Р°РїСЏС‚РѕР№ Рё РїСЂРѕР±РµР»Р°
         }
         foundLetters += ")";
         return upperWord + foundLetters;
@@ -71,7 +71,7 @@ int main() {
     std::ofstream outputFile("output.txt");
 
     if (!inputFile.is_open() || !outputFile.is_open()) {
-        std::cerr << "Ошибка при открытии файла!" << std::endl;
+        std::cerr << "ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г®ГІГЄГ°Г»ГІГЁГЁ ГґГ Г©Г«Г !" << std::endl;
         return 1;
     }
 
@@ -82,7 +82,7 @@ int main() {
     std::string processedText;
     std::string word;
     for (size_t i = 0; i < text.length(); i++) {
-        // Считываем слово
+        // РЎС‡РёС‚С‹РІР°РµС‚СЃСЏ СЃР»РѕРІРѕ
         if (isLetter(text[i])) {
             word.clear();
             while (i < text.length() && (isLetter(text[i]) || text[i] == '\'' || text[i] == '-')) {
@@ -92,7 +92,7 @@ int main() {
             processedText += processWord(word, mostFrequent, 8);
         }
         else {
-            processedText += text[i]; // Добавляем символы, которые не являются буквами
+            processedText += text[i]; // Р”РѕР±Р°РІР»РµРЅРёРµ СЃРёРјРІРѕР»РѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ Р±СѓРєРІР°РјРё
         }
     }
 
