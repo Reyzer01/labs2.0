@@ -49,7 +49,7 @@ int main(){
     // Сортировка слова по количеству различных согласных
     std::vector<std::pair<std::string, int>> sortedWords(wordConsonantCount.begin(), wordConsonantCount.end());
     std::sort(sortedWords.begin(), sortedWords.end(), [](const auto& a, const auto& b) {
-        return a.second > b.second; // Ñîðòèðîâêà ïî óáûâàíèþ
+        return a.second > b.second; 
         });
 
     // Ограние количества слов до N (2000)
