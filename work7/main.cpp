@@ -1,4 +1,4 @@
-#include "func.hpp"
+#include "func.сpp"
 
 int main() {
     int matrix[MAX_SIZE][MAX_SIZE];
