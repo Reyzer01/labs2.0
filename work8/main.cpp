@@ -51,17 +51,17 @@ int main() {
         wordConsonantCount.emplace_back(uniqueWord, count);
     }
 
-<<<<<<< HEAD
+
     // Сортировка по количеству различных согласных
     std::sort(wordConsonantCount.begin(), wordConsonantCount.end(),
         [](const auto& a, const auto& b) {
             return a.second > b.second;
-=======
+
     // Сортировка слова по количеству различных согласных
     std::vector<std::pair<std::string, int>> sortedWords(wordConsonantCount.begin(), wordConsonantCount.end());
     std::sort(sortedWords.begin(), sortedWords.end(), [](const auto& a, const auto& b) {
         return a.second > b.second; 
->>>>>>> bf804fd6908aac218de47a37f9892e82cf580782
+
         });
 
     // Запись результата в выходной файл
