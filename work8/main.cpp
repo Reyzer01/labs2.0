@@ -1,18 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <vector>
 #include <set>
+#include <vector>
 #include <algorithm>
-#include <map>
-//  Функция для проверки, является ли символ согласной
+#include <cctype>
+
 bool isConsonant(char c) {
     c = std::tolower(c);
-    return isalpha(c) && !std::strchr("aeiou", c);
+    return std::isalpha(c) && !std::strchr("aeiou", c);
 }
 
-//  Функция для подсчета различных согласных в слове
-int countDistinctConsonants(const std::string& word) {
+int countUniqueConsonants(const std::string& word) {
     std::set<char> consonants;
     for (char c : word) {
         if (isConsonant(c)) {
@@ -22,41 +21,45 @@ int countDistinctConsonants(const std::string& word) {
     return consonants.size();
 }
 
-int main(){
+int main() {
     std::ifstream inputFile("input.txt");
     std::ofstream outputFile("output.txt");
-    std::vector<std::string> words;
-    std::set<std::string> uniqueWords;
-    std::string line;
 
-    // Чтение файла и обработка слов
-    while (std::getline(inputFile, line)){
-        std::istringstream iss(line);
-        std::string word;
-        while (iss >> word){
-            if (countDistinctConsonants(word)){
-                uniqueWords.insert(word);
-            }
+    if (!inputFile.is_open() || !outputFile.is_open()) {
+        std::cerr << "Error opening file." << std::endl;
+        return 1;
+    }
+
+    std::string text;
+    std::string word;
+    std::set<std::string> uniqueWords;
+
+    // Чтение текста из файла
+    while (inputFile >> word) {
+        // Убираем знаки препинания
+        word.erase(std::remove_if(word.begin(), word.end(), ::ispunct), word.end());
+        if (!word.empty()) {
+            uniqueWords.insert(word);
         }
     }
-    std::string word;
-    std::map<std::string, int> wordConsonantCount;
-    // Перенос уникальных слов в вектор
-    for (const auto& word : uniqueWords){
-        words.push_back(word);
+
+    std::vector<std::pair<std::string, int>> wordConsonantCount;
+
+    // Подсчет различных согласных для каждого уникального слова
+    for (const auto& uniqueWord : uniqueWords) {
+        int count = countUniqueConsonants(uniqueWord);
+        wordConsonantCount.emplace_back(uniqueWord, count);
     }
 
-    // Сортировка слова по количеству различных согласных
-    std::vector<std::pair<std::string, int>> sortedWords(wordConsonantCount.begin(), wordConsonantCount.end());
-    std::sort(sortedWords.begin(), sortedWords.end(), [](const auto& a, const auto& b) {
-        return a.second > b.second; // Ñîðòèðîâêà ïî óáûâàíèþ
+    // Сортировка по количеству различных согласных
+    std::sort(wordConsonantCount.begin(), wordConsonantCount.end(),
+        [](const auto& a, const auto& b) {
+            return a.second > b.second;
         });
 
-    // Ограние количества слов до N (2000)
-    int N = std::min(2000, static_cast<int>(sortedWords.size()));
-
-    for (int i = 0; i < N; ++i) {
-        outputFile << sortedWords[i].first << " " << sortedWords[i].second << std::endl;
+    // Запись результата в выходной файл
+    for (const auto& pair : wordConsonantCount) {
+        outputFile << pair.first << " " << pair.second << "\n"; // Используем pair.first и pair.second
     }
 
     inputFile.close();
@@ -64,3 +67,4 @@ int main(){
 
     return 0;
 }
+
