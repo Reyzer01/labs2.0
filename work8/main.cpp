@@ -18,7 +18,7 @@ int countDistinctConsonants(const std::string& word) {
     return consonants.size();
 }
 
-// 1 задание
+// 1 Р·Р°РґР°РЅРёРµ
 std::vector<std::pair<std::string, int>> findWordsWithMostConsonants(std::ifstream& inputFile) {
     std::map<std::string, int> wordCount;
     std::string word;
@@ -49,7 +49,7 @@ void writeWordsToFile(const std::vector<std::pair<std::string, int>>& words, con
     }
 }
 
-// 2 задание
+// 2 Р·Р°РґР°РЅРёРµ
 std::vector<std::string> processWordsInText(const std::string& text) {
     std::istringstream stream(text);
     std::string word;
@@ -90,13 +90,13 @@ void writeProcessedWordsToFile(const std::vector<std::string>& words, const std:
     }
 }
 
-// 3 задание
+// 3 Р·Р°РґР°РЅРёРµ
 std::string findWordsWithFrequentLetters(std::ifstream& inputFile) {
     std::map<char, int> letterFrequency;
     std::string text;
     std::string word;
 
-    // частота
+    // С‡Р°СЃС‚РѕС‚Р°
     while (inputFile >> word) {
         for (char ch : word) {
             if (isalpha(ch)) {
@@ -106,7 +106,7 @@ std::string findWordsWithFrequentLetters(std::ifstream& inputFile) {
         text += word + " ";
     }
 
-    // 8 самых частых букв
+    // 8 СЃР°РјС‹С… С‡Р°СЃС‚С‹С… Р±СѓРєРІ
     std::vector<std::pair<char, int>> freqVec(letterFrequency.begin(), letterFrequency.end());
     std::sort(freqVec.begin(), freqVec.end(), [](const auto& a, const auto& b) {
         return a.second > b.second;
@@ -151,20 +151,20 @@ int main() {
         return 1;
     }
 
-    // 1 задание
+    // 1 Р·Р°РґР°РЅРёРµ
     std::vector<std::pair<std::string, int>> wordsWithConsonants = findWordsWithMostConsonants(inputFile);
     writeWordsToFile(wordsWithConsonants, "output1.txt");
 
     inputFile.clear();
-    inputFile.seekg(0, std::ios::beg); // Сбросить указатель файла
+    inputFile.seekg(0, std::ios::beg); //  РЎР±СЂРѕСЃРёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ С„Р°Р№Р»Р°
 
-    // 2 задание
+    // 2 Р·Р°РґР°РЅРёРµ
     std::string text;
-    std::getline(inputFile, text, '\0'); // Чтение всего текста
+    std::getline(inputFile, text, '\0'); // С‡С‚РµРЅРёРµ С‚РµРєСЃС‚Р°
     std::vector<std::string> processedWords = processWordsInText(text);
     writeProcessedWordsToFile(processedWords, "output2.txt");
 
-    // 3 задание
+    // 3 Р·Р°РґР°РЅРёРµ
     inputFile.clear();
     inputFile.seekg(0, std::ios::beg);
     std::string outputText = findWordsWithFrequentLetters(inputFile);
