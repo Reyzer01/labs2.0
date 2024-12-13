@@ -11,7 +11,7 @@ struct Node {
     Node(int data) : data(data), next(nullptr) {}
 };
 
-// Adds a node to the end of the list
+// Добавляет узел в конец списка
 Node* addNode(Node* head, int data) {
     Node* newNode = new Node(data);
     if (head == nullptr) return newNode;
@@ -22,7 +22,7 @@ Node* addNode(Node* head, int data) {
 }
 
 
-//Checks if a number is a palindrome
+// Проверяет, является ли число палиндромом
 bool isPalindrome(int n) {
     string s = to_string(n);
     string rs = s;
@@ -30,21 +30,21 @@ bool isPalindrome(int n) {
     return s == rs;
 }
 
-//Gets the first digit of a number
+// Возвращает первую цифру числа
 int getFirstDigit(int n) {
     if (n == 0) return 0;
     string s = to_string(n);
     return s[0] - '0';
 }
 
-//Gets the last digit of a number
+// Возвращает последнюю цифру числа
 int getLastDigit(int n) {
     if (n == 0) return 0;
     string s = to_string(n);
     return s.back() - '0';
 }
 
-//Prints the linked list
+// Выводит список
 void printList(Node* head) {
     Node* current = head;
     while (current != nullptr) {
@@ -54,7 +54,7 @@ void printList(Node* head) {
     cout << endl;
 }
 
-//Deletes the linked list
+// Удаляет список
 void deleteList(Node* head) {
     Node* current = head;
     while (current != nullptr) {
@@ -97,9 +97,9 @@ int main() {
     if (orderedByFirst || orderedByLast) {
         for (int n : inputSequence) {
             string s = to_string(n);
-            if (s.length() > 1) { //Only consider numbers with more than one digit
+            if (s.length() > 1) { // Учитывает только числа, состоящие более чем из одной цифры
                 head = addNode(head, n);
-                if (isPalindrome(n)) head = addNode(head, n); // Duplicate palindromes
+                if (isPalindrome(n)) head = addNode(head, n); // Дублирует палиндромы
             }
         }
     }
