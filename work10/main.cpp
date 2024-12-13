@@ -1,34 +1,28 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 
 using namespace std;
 
-// Структура узла односвязного списка
 struct Node {
     int data;
     Node* next;
+    Node(int data) : data(data), next(nullptr) {}
 };
 
-// Функция для добавления узла в начало списка
+// Adds a node to the end of the list
 Node* addNode(Node* head, int data) {
-    Node* newNode = new Node;
-    newNode->data = data;
-    newNode->next = head;
-    return newNode;
-}
-
-// Функция для печати списка
-void printList(Node* head) {
+    Node* newNode = new Node(data);
+    if (head == nullptr) return newNode;
     Node* current = head;
-    while (current != nullptr) {
-        cout << current->data << " ";
-        current = current->next;
-    }
-    cout << endl;
+    while (current->next != nullptr) current = current->next;
+    current->next = newNode;
+    return head;
 }
 
-// Функция для проверки на палиндром
+
+//Checks if a number is a palindrome
 bool isPalindrome(int n) {
     string s = to_string(n);
     string rs = s;
@@ -36,97 +30,92 @@ bool isPalindrome(int n) {
     return s == rs;
 }
 
-// Функция для извлечения первой цифры
+//Gets the first digit of a number
 int getFirstDigit(int n) {
-    return to_string(n)[0] - '0';
+    if (n == 0) return 0;
+    string s = to_string(n);
+    return s[0] - '0';
 }
 
-// Функция для извлечения последней цифры
+//Gets the last digit of a number
 int getLastDigit(int n) {
-    return to_string(n).back() - '0';
+    if (n == 0) return 0;
+    string s = to_string(n);
+    return s.back() - '0';
 }
 
+//Prints the linked list
+void printList(Node* head) {
+    Node* current = head;
+    while (current != nullptr) {
+        cout << current->data << (current->next ? " " : "");
+        current = current->next;
+    }
+    cout << endl;
+}
+
+//Deletes the linked list
+void deleteList(Node* head) {
+    Node* current = head;
+    while (current != nullptr) {
+        Node* next = current->next;
+        delete current;
+        current = next;
+    }
+}
 
 int main() {
-    vector<int> sequence;
+    vector<int> inputSequence;
     int num;
 
-    cout << "Enter a sequence of natural numbers (enter 0 to complete):" << endl;
-    while (cin >> num && num != 0) {
-        sequence.push_back(num);
+    int count;
+    cout << "Enter the number of natural numbers in the sequence: ";
+    cin >> count;
+
+
+    for (int i = 0; i < count; ++i) {
+        int num;
+        cin >> num;
+        inputSequence.push_back(num);
+    }
+
+
+    if (inputSequence.empty()) {
+        cout << "Empty sequence." << endl;
+        return 0;
+    }
+
+
+    bool orderedByFirst = true;
+    bool orderedByLast = true;
+    for (size_t i = 1; i < inputSequence.size(); ++i) {
+        if (getFirstDigit(inputSequence[i - 1]) < getFirstDigit(inputSequence[i])) orderedByFirst = false;
+        if (getLastDigit(inputSequence[i - 1]) < getLastDigit(inputSequence[i])) orderedByLast = false;
     }
 
     Node* head = nullptr;
-    for (int x : sequence) {
-        head = addNode(head, x);
-    }
-
-
-    bool orderedByFirstDigit = true;
-    bool orderedByLastDigit = true;
-    Node* current = head;
-    if (current != nullptr && current->next != nullptr) {
-        int prevFirst = getFirstDigit(current->data);
-        int prevLast = getLastDigit(current->data);
-        current = current->next;
-        while (current != nullptr) {
-            int curFirst = getFirstDigit(current->data);
-            int curLast = getLastDigit(current->data);
-            if (prevFirst < curFirst) orderedByFirstDigit = false;
-            if (prevLast < curLast) orderedByLastDigit = false;
-            prevFirst = curFirst;
-            prevLast = curLast;
-            current = current->next;
-        }
-    }
-
-
-    if (orderedByFirstDigit || orderedByLastDigit) {
-        Node* newHead = nullptr;
-        current = head;
-        while (current != nullptr) {
-            if (to_string(current->data).length() > 1) {
-                if (isPalindrome(current->data)) {
-                    newHead = addNode(newHead, current->data);
-                    newHead = addNode(newHead, current->data);
-                }
-                else {
-                    newHead = addNode(newHead, current->data);
-                }
+    if (orderedByFirst || orderedByLast) {
+        for (int n : inputSequence) {
+            string s = to_string(n);
+            if (s.length() > 1) { //Only consider numbers with more than one digit
+                head = addNode(head, n);
+                if (isPalindrome(n)) head = addNode(head, n); // Duplicate palindromes
             }
-            Node* temp = current;
-            current = current->next;
-            delete temp;
         }
-        head = newHead;
-
     }
     else {
         vector<pair<int, int>> seqWithFirstDigit;
-        current = head;
-        while (current != nullptr) {
-            seqWithFirstDigit.push_back({ getFirstDigit(current->data), current->data });
-            Node* temp = current;
-            current = current->next;
-            delete temp;
+        for (int n : inputSequence) {
+            seqWithFirstDigit.push_back({ getFirstDigit(n), n });
         }
         sort(seqWithFirstDigit.begin(), seqWithFirstDigit.end());
-        head = nullptr;
         for (const auto& p : seqWithFirstDigit) {
             head = addNode(head, p.second);
         }
     }
 
     printList(head);
-
-
-    // Освобождение памяти
-    current = head;
-    while (current != nullptr) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-    }
+    deleteList(head);
 
     return 0;
 }
